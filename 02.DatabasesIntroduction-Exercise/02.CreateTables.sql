@@ -1,0 +1,12 @@
+CREATE TABLE Minions (
+	Id INT,
+	"Name" VARCHAR(MAX),
+	Age VARCHAR(MAX),
+	PRIMARY KEY (Id)
+	);
+
+CREATE TABLE Towns (
+	Id INT,
+	"Name" VARCHAR(MAX),
+	PRIMARY KEY (Id)
+	);
