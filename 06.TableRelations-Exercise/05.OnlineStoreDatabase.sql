@@ -1,0 +1,51 @@
+CREATE DATABASE OnlineStore;
+
+CREATE TABLE Customers (
+    CustomerID INT NOT NULL,
+    CONSTRAINT PK_CustomerId PRIMARY KEY (CustomerID),
+    Name VARCHAR(50) NOT NULL,
+    Birtday DATE,
+    CityID INT NOT NULL,
+    );
+
+CREATE TABLE Cities (
+    CityID INT NOT NULL,
+    CONSTRAINT PK_CityId PRIMARY KEY (CityID),
+    Name VARCHAR(50) NOT NULL,
+    );
+
+ALTER TABLE Customers
+    ADD CONSTRAINT FK_CustomerCityId FOREIGN KEY (CityID) REFERENCES Cities(CityID);
+
+CREATE TABLE Orders (
+    OrderID INT NOT NULL,
+    CONSTRAINT PK_OrderID PRIMARY KEY (OrderID),
+    CustomerID INT NOT NULL,
+    );
+
+ALTER TABLE Orders
+    ADD CONSTRAINT FK_OrderCustomerId FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID);
+
+CREATE TABLE Items (
+    ItemID INT NOT NULL,
+    CONSTRAINT PK_ItemID PRIMARY KEY (ItemID),
+    Name VARCHAR(50) NOT NULL,
+    ItemTypeID INT NOT NULL,
+    );
+
+CREATE TABLE OrderItems (
+    OrderID INT NOT NULL,
+    ItemID INT NOT NULL,
+    CONSTRAINT PK_OrderItem PRIMARY KEY (OrderID, ItemID),
+    CONSTRAINT FK_OrderItemOrderID FOREIGN KEY (OrderID) REFERENCES Orders(OrderID),
+    CONSTRAINT FK_OrderItemItemID FOREIGN KEY (ItemID) REFERENCES Items(ItemID),
+    );
+
+CREATE TABLE ItemTypes (
+    ItemTypeID INT NOT NULL,
+    CONSTRAINT PK_ItemTypeId PRIMARY KEY (ItemTypeID),
+    Name VARCHAR(50) NOT NULL,
+    );
+
+ALTER TABLE Items
+    ADD CONSTRAINT FK_ItemItemTypeId FOREIGN KEY (ItemTypeID) REFERENCES ItemTypes(ItemTypeID);
