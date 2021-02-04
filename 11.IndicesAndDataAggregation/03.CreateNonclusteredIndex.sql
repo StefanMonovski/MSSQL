@@ -1,0 +1,1 @@
+CREATE NONCLUSTERED INDEX IX_IncomesVendorId ON DailyIncome(VendorId);
